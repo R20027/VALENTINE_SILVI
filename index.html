@@ -53,7 +53,7 @@
         }
 
         /* -------------------------------
-           ENTRANCE OVERLAY (MINIMAL)
+           ENTRANCE OVERLAY
         ------------------------------- */
         .entrance {
             position: fixed;
@@ -158,7 +158,7 @@
         .card {
             position: relative;
             z-index: 50;
-            max-width: 820px;
+            max-width: 900px;
             width: 100%;
             background: rgba(15, 17, 22, 0.68);
             backdrop-filter: blur(32px);
@@ -197,7 +197,6 @@
             cursor: pointer;
         }
 
-        /* Core background */
         .emblem-core {
             position: absolute;
             width: 100%;
@@ -210,7 +209,6 @@
             z-index: 1;
         }
 
-        /* Inner white heart */
         .emblem-inner {
             position: absolute;
             width: 70%;
@@ -234,8 +232,7 @@
             filter: drop-shadow(0 0 6px rgba(255, 120, 140, 0.6));
         }
 
-        /* ===== PERFECT CIRCLE RINGS (BENERAN BULAT!) ===== */
-        /* Ring 1 - Solid tipis dengan glow */
+        /* Ring 1 - Solid tipis */
         .ring-solid {
             position: absolute;
             width: 115%;
@@ -247,7 +244,7 @@
             z-index: 2;
         }
 
-        /* Ring 2 - Putus-putus (dashed) yang proper */
+        /* Ring 2 - Dashed muter */
         .ring-dashed {
             position: absolute;
             width: 132%;
@@ -258,13 +255,11 @@
             z-index: 2;
         }
 
-        /* Animasi ring solid - hidup-mati halus */
         @keyframes pulseRing {
             0%, 100% { transform: scale(1); opacity: 0.4; }
             50% { transform: scale(1.05); opacity: 0.7; }
         }
 
-        /* Animasi ring dashed - muter pelan */
         @keyframes rotateRing {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -341,7 +336,7 @@
         }
 
         /* -------------------------------
-           TIMER — CLEAN GRID
+           TIMER
         ------------------------------- */
         .timer-grid {
             display: grid;
@@ -379,7 +374,7 @@
         }
 
         /* -------------------------------
-           APOLOGY — ELEVATED
+           APOLOGY
         ------------------------------- */
         .apology-fragment {
             background: rgba(25, 18, 24, 0.45);
@@ -415,7 +410,7 @@
         }
 
         /* -------------------------------
-           3 LANGUAGES — ELEGANT LIST
+           3 LANGUAGES
         ------------------------------- */
         .polyglot {
             background: rgba(18, 22, 30, 0.4);
@@ -451,7 +446,58 @@
         }
 
         /* -------------------------------
-           GALLERY — MINIATURE
+           PHOTO GALLERY - 4 FOTO (UPDATED)
+        ------------------------------- */
+        .photo-gallery {
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        .photo-title {
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            color: #ffb6c1;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+        }
+
+        .photo-item {
+            aspect-ratio: 1 / 1;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 182, 193, 0.2);
+            box-shadow: 0 15px 30px -15px black;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .photo-item:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 182, 193, 0.5);
+            box-shadow: 0 0 30px rgba(255, 140, 170, 0.2);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* fallback if image not loaded */
+        .photo-item img[alt] {
+            background: linear-gradient(145deg, #2a2025, #1a1518);
+        }
+
+        /* -------------------------------
+           MICRO GALLERY (icons)
         ------------------------------- */
         .micro-gallery {
             display: flex;
@@ -534,6 +580,58 @@
             letter-spacing: 0.3px;
         }
 
+        /* -------------------------------
+           MUSIC PLAYER (discreet)
+        ------------------------------- */
+        .music-player {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 200;
+            background: rgba(15, 17, 22, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .music-player audio {
+            display: none; /* hide default audio, kita kontrol via tombol */
+        }
+
+        .music-player .music-control {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 182, 193, 0.2);
+            border: 1px solid rgba(255, 182, 193, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #ffb6c1;
+        }
+
+        .music-player .music-control:hover {
+            background: rgba(255, 140, 170, 0.3);
+            transform: scale(1.1);
+        }
+
+        .music-player .music-link {
+            font-size: 0.8rem;
+            color: #ffb6c1;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            opacity: 0.8;
+        }
+
         .footer-minimal {
             margin-top: 2.5rem;
             color: #6c7a8a;
@@ -561,12 +659,19 @@
             100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
         }
 
+        @media (max-width: 700px) {
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 600px) {
             .card { padding: 2rem 1.5rem; }
             .greeting-supreme { font-size: 2.5rem; }
             .name-luxury { font-size: 2.2rem; }
             .timer-number { font-size: 1.8rem; }
             .entrance-title { font-size: 2.6rem; }
+            .photo-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -587,16 +692,27 @@
     </div>
 </div>
 
-<!-- ========== MAIN CARD — VALENTINE EDITION ========== -->
+<!-- ========== MUSIC PLAYER ========== -->
+<div class="music-player" id="musicPlayer">
+    <span class="music-link" id="musicLink">🎵 lagu untuk Silvi</span>
+    <div class="music-control" id="musicToggle">
+        <i class="fas fa-play" id="musicIcon"></i>
+    </div>
+    <audio id="audioPlayer" loop>
+        <!-- GANTI: https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/lagu.mp3 -->
+        <source src="https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/lagu.mp3" type="audio/mpeg">
+        Browser tidak mendukung audio.
+    </audio>
+</div>
+
+<!-- ========== MAIN CARD ========== -->
 <div class="card" id="mainCard">
     
-    <!-- Emblem dengan RING BULAT SEMPURNA! -->
+    <!-- Emblem -->
     <div class="emblem">
         <div class="emblem-sphere" id="logoButton">
             <div class="emblem-core"></div>
-            <!-- RING 1: Solid tipis (beneran ngelilingin) -->
             <div class="ring-solid"></div>
-            <!-- RING 2: Dashed (beneran ngelilingin) -->
             <div class="ring-dashed"></div>
             <div class="emblem-inner">
                 <i class="fas fa-heart"></i>
@@ -642,7 +758,7 @@
         </div>
     </div>
 
-    <!-- APOLOGY LDR -->
+    <!-- APOLOGY -->
     <div class="apology-fragment">
         <div class="apology-title">
             <i class="fas fa-heart-half-alt" style="color: #ffa5b9;"></i>
@@ -673,7 +789,30 @@
         </div>
     </div>
 
-    <!-- GALLERY -->
+    <!-- ===== PHOTO GALLERY - 4 FOTO (ganti nama file di src) ===== -->
+    <div class="photo-gallery">
+        <div class="photo-title">🌸 4 momen terindah 🌸</div>
+        <div class="photo-grid">
+            <!-- GANTI: https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/foto1.jpg -->
+            <div class="photo-item">
+                <img src="https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/foto1.jpg" alt="Momen 1">
+            </div>
+            <!-- GANTI: https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/foto2.jpg -->
+            <div class="photo-item">
+                <img src="https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/foto2.jpg" alt="Momen 2">
+            </div>
+            <!-- GANTI: https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/foto3.jpg -->
+            <div class="photo-item">
+                <img src="https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/foto3.jpg" alt="Momen 3">
+            </div>
+            <!-- GANTI: https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/foto4.jpg -->
+            <div class="photo-item">
+                <img src="https://raw.githubusercontent.com/R20027/VALENTINE_SILVI/main/foto4.jpg" alt="Momen 4">
+            </div>
+        </div>
+    </div>
+
+    <!-- Icon Gallery -->
     <div class="micro-gallery">
         <div class="micro-icon"><i class="fas fa-crown"></i></div>
         <div class="micro-icon"><i class="fas fa-map-pin"></i></div>
@@ -702,7 +841,7 @@
     (function() {
         "use strict";
 
-        // ENTRANCE
+        // ---------- ENTRANCE ----------
         const entrance = document.getElementById('entranceOverlay');
         const enterBtn = document.getElementById('enterBtn');
         const mainCard = document.getElementById('mainCard');
@@ -721,7 +860,7 @@
             for (let i = 0; i < 16; i++) createHeart(rect.left + rect.width/2, rect.top + rect.height/2);
         });
 
-        // COUNTDOWN
+        // ---------- COUNTDOWN ----------
         function updateTimer() {
             const target = new Date('January 10, 2027 00:00:00').getTime();
             const now = new Date().getTime();
@@ -747,7 +886,7 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // LOVE BUTTON
+        // ---------- LOVE BUTTON ----------
         const loveBtn = document.getElementById('loveBtn');
         const responseEl = document.getElementById('responseMessage');
 
@@ -772,7 +911,7 @@
             setTimeout(() => loveBtn.style.transform = 'scale(1)', 150);
         });
 
-        // HEART BURST
+        // ---------- HEART BURST ----------
         function createHeart(x, y) {
             const heart = document.createElement('div');
             heart.className = 'heart-float';
@@ -788,7 +927,7 @@
             setTimeout(() => heart.remove(), 1400);
         }
 
-        // LOGO INTERAKTIF
+        // ---------- LOGO INTERAKTIF ----------
         const logoBtn = document.getElementById('logoButton');
         const emblemCaption = document.getElementById('emblemCaption');
         const emblemInner = document.querySelector('.emblem-inner i');
@@ -806,7 +945,37 @@
             }, 2800);
         });
 
-        // BACKGROUND HEARTS
+        // ---------- MUSIC PLAYER ----------
+        const audio = document.getElementById('audioPlayer');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicLink = document.getElementById('musicLink');
+
+        // GANTI: Nama lagu yang tampil (opsional)
+        musicLink.textContent = '🎵 Kota ini tak sama tanpamu - lagu.mp3';
+
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.className = 'fas fa-play';
+                isPlaying = false;
+            } else {
+                audio.play().catch(e => {
+                    console.log('Klik lagi untuk play');
+                });
+                musicIcon.className = 'fas fa-pause';
+                isPlaying = true;
+            }
+        });
+
+        audio.addEventListener('ended', function() {
+            musicIcon.className = 'fas fa-play';
+            isPlaying = false;
+        });
+
+        // ---------- BACKGROUND HEARTS ----------
         function initBackgroundHearts() {
             for (let i = 0; i < 18; i++) {
                 setTimeout(() => {
