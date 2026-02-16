@@ -12,7 +12,7 @@
 
     <style>
         /* -------------------------------
-           RESET & VARIABLES (BLUE NUANCE)
+           RESET & VARIABLES
         ------------------------------- */
         * {
             margin: 0;
@@ -37,6 +37,19 @@
             padding: 1.5rem;
             position: relative;
             overflow-x: hidden;
+            transition: background-color 1s ease, background-image 1s ease;
+        }
+
+        /* Mode gelap romantis */
+        body.dark-romantic {
+            background-color: #03050a;
+            background-image: radial-gradient(circle at 70% 10%, rgba(100, 80, 150, 0.2) 0%, transparent 45%),
+                              radial-gradient(circle at 20% 80%, rgba(80, 60, 140, 0.15) 0%, transparent 50%);
+        }
+
+        body.dark-romantic .star {
+            opacity: 0.3;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
         }
 
         /* subtle noise texture */
@@ -52,8 +65,34 @@
             z-index: 1;
         }
 
+        /* ===== BINTANG HALUS CINEMATIC ===== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            transition: opacity 1s, box-shadow 1s;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
         /* -------------------------------
-           ENTRANCE OVERLAY (BLUE THEME)
+           ENTRANCE OVERLAY
         ------------------------------- */
         .entrance {
             position: fixed;
@@ -68,7 +107,6 @@
             z-index: 1000;
             transition: opacity 1.2s cubic-bezier(0.28, 0.82, 0.34, 1), visibility 1.2s ease;
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
         }
 
         .entrance-content {
@@ -108,7 +146,6 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 2.5rem;
-            word-spacing: 6px;
         }
 
         .btn-entrance {
@@ -127,6 +164,7 @@
             gap: 14px;
             backdrop-filter: blur(12px);
             background: rgba(25, 35, 55, 0.2);
+            transform: scale(1);
         }
 
         .btn-entrance i {
@@ -147,13 +185,17 @@
             color: #b0d0ff;
         }
 
+        .btn-entrance:active {
+            transform: scale(0.98);
+        }
+
         @keyframes appear {
             0% { opacity: 0; transform: translateY(18px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         /* -------------------------------
-           MAIN CARD — BLUE GLASS
+           MAIN CARD
         ------------------------------- */
         .card {
             position: relative;
@@ -162,7 +204,6 @@
             width: 100%;
             background: rgba(12, 20, 35, 0.75);
             backdrop-filter: blur(32px);
-            -webkit-backdrop-filter: blur(32px);
             border-radius: 48px;
             border: 1px solid rgba(100, 160, 255, 0.15);
             box-shadow: 0 35px 70px -25px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(100, 160, 255, 0.05);
@@ -170,6 +211,7 @@
             opacity: 0;
             transform: translateY(30px) scale(0.98);
             transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
         }
 
         .card.show {
@@ -178,7 +220,7 @@
         }
 
         /* -------------------------------
-           LOGO / EMBLEM — BLUE RINGS
+           LOGO / EMBLEM
         ------------------------------- */
         .emblem {
             display: flex;
@@ -195,6 +237,10 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .emblem-sphere:active {
+            transform: scale(0.95);
         }
 
         .emblem-core {
@@ -205,7 +251,6 @@
             background: radial-gradient(circle at 35% 35%, #4a80d0, #1a3a6a);
             opacity: 0.9;
             box-shadow: 0 0 35px rgba(70, 130, 200, 0.4);
-            transition: all 0.4s;
             z-index: 1;
         }
 
@@ -232,7 +277,6 @@
             filter: drop-shadow(0 0 6px rgba(70, 130, 200, 0.6));
         }
 
-        /* Ring 1 - Solid tipis */
         .ring-solid {
             position: absolute;
             width: 115%;
@@ -244,7 +288,6 @@
             z-index: 2;
         }
 
-        /* Ring 2 - Dashed muter */
         .ring-dashed {
             position: absolute;
             width: 132%;
@@ -276,7 +319,7 @@
         }
 
         /* -------------------------------
-           TYPOGRAPHY & DETAILS
+           TYPOGRAPHY
         ------------------------------- */
         .valentine-echo {
             text-align: center;
@@ -366,7 +409,6 @@
             padding: 1.5rem 0.5rem;
             border: 1px solid rgba(100, 160, 255, 0.15);
             backdrop-filter: blur(8px);
-            transition: 0.2s;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -384,7 +426,6 @@
             line-height: 1.2;
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(70, 130, 200, 0.5);
-            text-align: center;
             width: 100%;
         }
 
@@ -395,7 +436,6 @@
             text-transform: uppercase;
             margin-top: 8px;
             font-weight: 600;
-            text-align: center;
             width: 100%;
         }
 
@@ -405,7 +445,7 @@
         .apology-fragment {
             background: rgba(20, 35, 55, 0.5);
             border-radius: 32px;
-            padding: 2rem 2rem;
+            padding: 2rem;
             margin: 2.2rem 0;
             border-left: 5px solid #4a80d0;
             border-right: 5px solid #4a80d0;
@@ -431,17 +471,14 @@
             padding: 1.5rem 2rem;
             border-radius: 24px;
             border: 1px solid rgba(100, 160, 255, 0.3);
-            font-style: normal;
-            font-weight: 400;
         }
-
         .apology-text span {
             color: #b0d8ff;
             font-weight: 500;
         }
 
         /* -------------------------------
-           CLICK TO SEE MORE SECTION (DIPINDAH KE ATAS 3 BAHASA)
+           CLICK TO SEE MORE
         ------------------------------- */
         .see-more-section {
             text-align: center;
@@ -453,13 +490,14 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .see-more-section:hover {
             background: rgba(255, 182, 193, 0.1);
             border-color: #ffb6c1;
             transform: scale(1.02);
         }
-
+        .see-more-section:active {
+            transform: scale(0.98);
+        }
         .see-more-text {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
@@ -471,11 +509,9 @@
             margin-bottom: 0.5rem;
             text-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
         }
-
         .see-more-text div {
             margin: 0.2rem 0;
         }
-
         .see-more-click {
             display: inline-flex;
             align-items: center;
@@ -489,23 +525,20 @@
             border-radius: 40px;
             animation: pulseClick 2s infinite;
         }
-
         .see-more-click i {
             animation: bounceArrow 1.5s infinite;
         }
-
         @keyframes pulseClick {
             0%, 100% { opacity: 0.8; }
             50% { opacity: 1; background: rgba(255, 182, 193, 0.1); }
         }
-
         @keyframes bounceArrow {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(5px); }
         }
 
         /* -------------------------------
-           3 LANGUAGES (SEKARANG DI BAWAH CLICK TO SEE MORE)
+           3 LANGUAGES
         ------------------------------- */
         .polyglot {
             background: rgba(20, 35, 55, 0.45);
@@ -514,56 +547,36 @@
             margin-bottom: 2rem;
             border: 1px solid rgba(100, 160, 255, 0.15);
         }
-
         .polyglot-item {
             display: flex;
             align-items: baseline;
             gap: 16px;
             margin-bottom: 1.3rem;
         }
-
         .polyglot-flag {
             font-size: 1.4rem;
             min-width: 48px;
-            opacity: 1;
         }
-
         .polyglot-text {
             color: #ffffff;
             font-size: 1.05rem;
             line-height: 1.7;
             font-weight: 400;
         }
-
         .polyglot-text strong {
             color: #b0d8ff;
             font-weight: 700;
         }
 
         /* -------------------------------
-           PHOTO GALLERY - 4 FOTO
+           PHOTO GALLERY
         ------------------------------- */
-        .photo-gallery {
-            margin: 2.5rem 0 1.5rem;
-        }
-
-        .photo-title {
-            text-align: center;
-            font-size: 1rem;
-            letter-spacing: 4px;
-            color: #b0d0ff;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.2rem;
-            margin-bottom: 1rem;
+            margin: 2rem 0;
         }
-
         .photo-item {
             border-radius: 24px;
             overflow: hidden;
@@ -573,13 +586,11 @@
             background: rgba(0,0,0,0.2);
             cursor: pointer;
         }
-
         .photo-item:hover {
             transform: scale(1.02);
             border-color: #7fb0ff;
             box-shadow: 0 0 30px rgba(70, 130, 200, 0.3);
         }
-
         .photo-item img {
             width: 100%;
             height: 100%;
@@ -588,7 +599,7 @@
         }
 
         /* -------------------------------
-           PHOTO POPUP (FIXED)
+           POPUP FOTO
         ------------------------------- */
         .photo-popup {
             position: fixed;
@@ -603,18 +614,15 @@
             transition: 0.4s ease;
             z-index: 9999;
         }
-
         .photo-popup.active {
             opacity: 1;
             visibility: visible;
         }
-
         .popup-content {
             position: relative;
             padding: 0;
             background: transparent;
         }
-
         .popup-content img {
             width: 380px;
             max-width: 90vw;
@@ -624,7 +632,6 @@
             position: relative;
             z-index: 2;
         }
-
         .close-popup {
             position: absolute;
             top: -35px;
@@ -635,8 +642,7 @@
             z-index: 10000;
             font-weight: bold;
         }
-
-        /* DEKORASI BUNGA DENGAN EMOJI (AMAN) */
+        /* dekorasi popup */
         .popup-decor-top {
             position: absolute;
             top: -60px;
@@ -650,7 +656,6 @@
             z-index: 10;
             pointer-events: none;
         }
-
         .popup-decor-bottom {
             position: absolute;
             bottom: -60px;
@@ -664,7 +669,6 @@
             z-index: 10;
             pointer-events: none;
         }
-
         .decor-left, .decor-right {
             position: absolute;
             font-size: 3rem;
@@ -674,27 +678,19 @@
             z-index: 10;
             pointer-events: none;
         }
-
-        .decor-left {
-            left: -80px;
-        }
-
-        .decor-right {
-            right: -80px;
-        }
-
+        .decor-left { left: -80px; }
+        .decor-right { right: -80px; }
         @keyframes floatDecor {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-
         @keyframes spinDecor {
             from { transform: translateY(-50%) rotate(0deg); }
             to { transform: translateY(-50%) rotate(360deg); }
         }
 
         /* -------------------------------
-           MICRO GALLERY (icons)
+           MICRO GALLERY ICONS (dengan animasi)
         ------------------------------- */
         .micro-gallery {
             display: flex;
@@ -703,7 +699,6 @@
             margin: 2.2rem 0 1.5rem;
             flex-wrap: wrap;
         }
-
         .micro-icon {
             width: 68px;
             height: 68px;
@@ -717,18 +712,48 @@
             border: 1px solid rgba(100, 160, 255, 0.2);
             backdrop-filter: blur(10px);
             transition: all 0.25s ease;
+            cursor: pointer;
         }
-
         .micro-icon:hover {
             background: rgba(70, 130, 200, 0.15);
             border-color: #7fb0ff;
             color: #ffffff;
             transform: rotate(5deg) scale(1.07);
-            border-radius: 22px;
+        }
+        /* animasi khusus untuk masing-masing ikon */
+        .micro-icon.glow-gold {
+            animation: goldGlow 1.5s infinite alternate;
+        }
+        @keyframes goldGlow {
+            from { box-shadow: 0 0 10px gold; }
+            to { box-shadow: 0 0 30px gold; }
+        }
+        .shake {
+            animation: shake 0.5s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .counter-animate {
+            animation: countUp 1s ease-out;
+        }
+        @keyframes countUp {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .shine {
+            animation: shine 1s linear;
+        }
+        @keyframes shine {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+            100% { filter: brightness(1); }
         }
 
         /* -------------------------------
-           BUTTON & RESPONSE
+           BUTTON LOVE
         ------------------------------- */
         .btn-love {
             background: transparent;
@@ -747,19 +772,19 @@
             background: rgba(30, 50, 80, 0.3);
             backdrop-filter: blur(12px);
         }
-
         .btn-love:hover {
             background: rgba(70, 130, 200, 0.2);
             border-color: #b0d8ff;
             transform: scale(1.02);
             box-shadow: 0 0 40px rgba(70, 130, 200, 0.2);
         }
-
+        .btn-love:active {
+            transform: scale(0.98);
+        }
         .btn-love i {
             color: #b0d0ff;
             font-size: 1.2rem;
         }
-
         .response-area {
             margin-top: 1.8rem;
             font-size: 1.1rem;
@@ -775,6 +800,7 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
         }
 
         /* -------------------------------
@@ -795,11 +821,9 @@
             gap: 0.8rem;
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
-
         .music-player audio {
             display: none;
         }
-
         .music-player .music-control {
             width: 40px;
             height: 40px;
@@ -813,12 +837,10 @@
             transition: all 0.2s;
             color: #b0d0ff;
         }
-
         .music-player .music-control:hover {
             background: rgba(70, 130, 200, 0.4);
             transform: scale(1.1);
         }
-
         .music-player .music-link {
             font-size: 0.85rem;
             color: #d0e8ff;
@@ -829,6 +851,9 @@
             font-weight: 500;
         }
 
+        /* -------------------------------
+           FOOTER
+        ------------------------------- */
         .footer-minimal {
             margin-top: 2.5rem;
             color: #a0c0ff;
@@ -842,6 +867,9 @@
             width: 100%;
         }
 
+        /* -------------------------------
+           HEART FLOAT (background)
+        ------------------------------- */
         .heart-float {
             position: fixed;
             color: rgba(100, 160, 255, 0.15);
@@ -851,19 +879,16 @@
             animation: rise 18s infinite linear;
             user-select: none;
         }
-
         @keyframes rise {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
             20% { opacity: 0.2; }
             100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
         }
 
+        /* responsive */
         @media (max-width: 700px) {
-            .photo-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 600px) {
             .card { padding: 2rem 1.5rem; }
             .greeting-supreme { font-size: 2.5rem; }
@@ -879,7 +904,10 @@
 </head>
 <body>
 
-<!-- POPUP FOTO (DENGAN DEKORASI) -->
+<!-- BINTANG HALUS -->
+<div class="stars" id="stars"></div>
+
+<!-- POPUP FOTO -->
 <div class="photo-popup" id="photoPopup">
     <div class="popup-content">
         <div class="popup-decor-top">🌸 🌼 🌻 🌺 🍫 🍬 🍭</div>
@@ -894,11 +922,11 @@
 <!-- ENTRANCE OVERLAY -->
 <div class="entrance" id="entranceOverlay">
     <div class="entrance-content">
-        <div class="entrance-monogram">SK</div>
+        <div class="entrance-monogram">FOR</div>
         <div class="entrance-title">Silviatul Kamila</div>
         <div class="entrance-sub">10.01.2007 — 19</div>
         <button class="btn-entrance" id="enterBtn">
-            <i class="fas fa-arrow-right"></i>  Buka Valentine  <i class="fas fa-heart"></i>
+            <i class="fas fa-arrow-right"></i>  Buka sayang  <i class="fas fa-heart"></i>
         </button>
         <div style="margin-top: 3rem; color: rgba(100,160,255,0.5); font-size: 0.75rem; letter-spacing: 5px;">
             LDR · 1000 km
@@ -912,7 +940,8 @@
     <div class="music-control" id="musicToggle">
         <i class="fas fa-play" id="musicIcon"></i>
     </div>
-    <audio id="audioPlayer" loop>
+    <audio id="audioPlayer" loop preload="auto">
+        <!-- GANTI DENGAN LINK LAGU KAMU -->
         <source src="https://r20027.github.io/VALENTINE_SILVI/lagu.mp3" type="audio/mpeg">
     </audio>
 </div>
@@ -985,7 +1014,7 @@
         </div>
     </div>
 
-    <!-- CLICK TO SEE MORE (DIPINDAH KE SINI - SEBELUM 3 BAHASA) -->
+    <!-- CLICK TO SEE MORE -->
     <div class="see-more-section" id="seeMoreBtn">
         <div class="see-more-text">
             <div>Happy</div>
@@ -997,7 +1026,7 @@
         </div>
     </div>
 
-    <!-- 3 LANGUAGES (SEKARANG DI BAWAH CLICK TO SEE MORE) -->
+    <!-- 3 LANGUAGES -->
     <div class="polyglot">
         <div class="polyglot-item">
             <span class="polyglot-flag">🇮🇩</span>
@@ -1029,16 +1058,16 @@
         </div>
     </div>
 
-    <!-- Icon Gallery -->
+    <!-- Icon Gallery (Interaktif!) -->
     <div class="micro-gallery">
-        <div class="micro-icon"><i class="fas fa-crown"></i></div>
-        <div class="micro-icon"><i class="fas fa-map-pin"></i></div>
-        <div class="micro-icon"><i class="fas fa-infinity"></i></div>
-        <div class="micro-icon"><i class="fas fa-gem"></i></div>
-        <div class="micro-icon"><i class="fas fa-moon"></i></div>
+        <div class="micro-icon" id="crownIcon"><i class="fas fa-crown"></i></div>
+        <div class="micro-icon" id="lollipopIcon"><i class="fas fa-candy-cane"></i></div>
+        <div class="micro-icon" id="infinityIcon"><i class="fas fa-infinity"></i></div>
+        <div class="micro-icon" id="diamondIcon"><i class="fas fa-gem"></i></div>
+        <div class="micro-icon" id="moonIcon"><i class="fas fa-moon"></i></div>
     </div>
 
-    <!-- BUTTON -->
+    <!-- BUTTON LOVE -->
     <div style="display: flex; flex-direction: column; align-items: center;">
         <button class="btn-love" id="loveBtn">
             <i class="fas fa-heart"></i>  klik sayang  <i class="fas fa-heart"></i>
@@ -1058,11 +1087,31 @@
 (function() {
     "use strict";
 
+    // ---------- BINTANG HALUS ----------
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        if (!starsContainer) return;
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 1; // 1-4px
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', (Math.random() * 5 + 3) + 's');
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+    createStars();
+
     // ---------- MUSIC PLAYER ----------
     const audio = document.getElementById('audioPlayer');
     const musicToggle = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
     let isPlaying = false;
+    let originalVolume = 1;
 
     // ---------- ENTRANCE ----------
     const entrance = document.getElementById('entranceOverlay');
@@ -1072,21 +1121,100 @@
     enterBtn.addEventListener('click', function(e) {
         e.preventDefault();
 
-        // Putar musik saat entrance diklik
+        // Musik fade in
+        audio.volume = 0;
         audio.play().catch(() => {});
         musicIcon.className = 'fas fa-pause';
         isPlaying = true;
+
+        let vol = 0;
+        const fadeIn = setInterval(() => {
+            vol += 0.05;
+            if (vol >= 1) {
+                audio.volume = 1;
+                originalVolume = 1;
+                clearInterval(fadeIn);
+            } else {
+                audio.volume = vol;
+            }
+        }, 100);
 
         entrance.style.opacity = '0';
         entrance.style.visibility = 'hidden';
         
         setTimeout(() => {
             mainCard.classList.add('show');
+            // tidak auto scroll
         }, 300);
 
-        const rect = enterBtn.getBoundingClientRect();
-        for (let i = 0; i < 16; i++) createHeart(rect.left + rect.width/2, rect.top + rect.height/2);
+        // Confetti realistis
+        startRealisticConfetti(20);
+
+        // Micro-interaction
+        enterBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => enterBtn.style.transform = 'scale(1)', 200);
     });
+
+    // ---------- CONFETTI REALISTIS ----------
+    function startRealisticConfetti(count) {
+        const canvas = document.createElement('canvas');
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '10001';
+        document.body.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        const particles = [];
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height - height,
+                size: Math.random() * 8 + 4,
+                speedY: Math.random() * 5 + 3,
+                speedX: Math.random() * 2 - 1,
+                color: `hsl(${Math.random() * 40 + 340}, 80%, 60%)`, // pink kemerahan
+                shape: Math.random() > 0.5 ? 'circle' : 'rect',
+                rotation: Math.random() * 360,
+                spin: Math.random() * 2 - 1
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            let still = false;
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                p.rotation += p.spin;
+                if (p.y < height + 50) still = true;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.fillStyle = p.color;
+                if (p.shape === 'circle') {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.size/2, 0, Math.PI*2);
+                    ctx.fill();
+                } else {
+                    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                }
+                ctx.restore();
+            });
+            if (still) requestAnimationFrame(draw);
+            else canvas.remove();
+        }
+        draw();
+    }
 
     // ---------- POPUP FOTO ----------
     const popup = document.getElementById("photoPopup");
@@ -1114,13 +1242,10 @@
     const seeMoreBtn = document.getElementById('seeMoreBtn');
     if (seeMoreBtn) {
         seeMoreBtn.addEventListener('click', function() {
-            // Scroll ke galeri foto
             document.querySelector('.photo-grid').scrollIntoView({ 
                 behavior: 'smooth', 
                 block: 'center' 
             });
-            
-            // Animasi kilatan
             seeMoreBtn.style.transform = 'scale(0.98)';
             setTimeout(() => seeMoreBtn.style.transform = 'scale(1)', 200);
         });
@@ -1167,31 +1292,13 @@
 
     loveBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        const rect = loveBtn.getBoundingClientRect();
-        for (let i = 0; i < 18; i++) createHeart(rect.left + rect.width/2, rect.top + rect.height/2);
-        
+        startRealisticConfetti(15);
         const random = deepQuotes[Math.floor(Math.random() * deepQuotes.length)];
         responseEl.innerHTML = random;
 
         loveBtn.style.transform = 'scale(0.98)';
         setTimeout(() => loveBtn.style.transform = 'scale(1)', 150);
     });
-
-    // ---------- HEART BURST ----------
-    function createHeart(x, y) {
-        const heart = document.createElement('div');
-        heart.className = 'heart-float';
-        heart.style.position = 'fixed';
-        heart.style.left = x + (Math.random() * 100 - 50) + 'px';
-        heart.style.top = y + (Math.random() * 80 - 40) + 'px';
-        heart.style.fontSize = (Math.random() * 26 + 14) + 'px';
-        heart.style.animation = 'rise 1.4s ease-out forwards';
-        heart.style.color = '#7fb0ff';
-        heart.style.zIndex = '9999';
-        heart.innerHTML = '💙';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1400);
-    }
 
     // ---------- LOGO INTERAKTIF ----------
     const logoBtn = document.getElementById('logoButton');
@@ -1218,9 +1325,7 @@
             musicIcon.className = 'fas fa-play';
             isPlaying = false;
         } else {
-            audio.play().catch(e => {
-                console.log('Klik lagi untuk play');
-            });
+            audio.play().catch(e => {});
             musicIcon.className = 'fas fa-pause';
             isPlaying = true;
         }
@@ -1249,6 +1354,83 @@
         }
     }
     initBackgroundHearts();
+
+    // ---------- INTERAKSI IKON MICRO GALLERY ----------
+    const crownIcon = document.getElementById('crownIcon');
+    const lollipopIcon = document.getElementById('lollipopIcon');
+    const infinityIcon = document.getElementById('infinityIcon');
+    const diamondIcon = document.getElementById('diamondIcon');
+    const moonIcon = document.getElementById('moonIcon');
+
+    // 👑 Mahkota
+    crownIcon.addEventListener('click', function() {
+        responseEl.innerHTML = '👑 Kamu tetap ratuku, sekarang dan selamanya.';
+        crownIcon.classList.add('glow-gold');
+        setTimeout(() => crownIcon.classList.remove('glow-gold'), 1500);
+    });
+
+    // 🍭 Lollipop
+    const lollipopMessages = [
+        '🍭 Masih inget kamu marah gara-gara aku telat bales? 😆',
+        '🍭 Ingat pas kita beli eskrim tapi kamu salah paham?🥰',
+        '🍭 Waktu kamu ngambek karena aku salah sebut tanggal jadian 🤭',
+        '🍭 Pas kita janjian nonton tapi kamu ketiduran 😴'
+    ];
+    lollipopIcon.addEventListener('click', function() {
+        const randomMsg = lollipopMessages[Math.floor(Math.random() * lollipopMessages.length)];
+        responseEl.innerHTML = randomMsg;
+        lollipopIcon.classList.add('shake');
+        setTimeout(() => lollipopIcon.classList.remove('shake'), 500);
+    });
+
+    // ♾ Infinity (lama hubungan)
+    // GANTI TANGGAL MULAI DI SINI (tahun, bulan, hari)
+    const relationshipStart = new Date(2025, 11, 7); // Contoh: 1 Januari 2025 (perhatikan bulan 0 = Januari)
+    function getRelationshipDuration() {
+        const now = new Date();
+        let years = now.getFullYear() - relationshipStart.getFullYear();
+        let months = now.getMonth() - relationshipStart.getMonth();
+        let days = now.getDate() - relationshipStart.getDate();
+        if (days < 0) {
+            months--;
+            const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+            days += lastMonth.getDate();
+        }
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+        return { years, months, days };
+    }
+    infinityIcon.addEventListener('click', function() {
+        const dur = getRelationshipDuration();
+        responseEl.innerHTML = `♾️ Kita udah bareng selama ${dur.years} tahun ${dur.months} bulan ${dur.days} hari.`;
+        infinityIcon.classList.add('counter-animate');
+        setTimeout(() => infinityIcon.classList.remove('counter-animate'), 1000);
+    });
+
+    // 💎 Diamond
+    diamondIcon.addEventListener('click', function() {
+        responseEl.innerHTML = '💎 Aku nggak main-main.';
+        diamondIcon.classList.add('shine');
+        setTimeout(() => diamondIcon.classList.remove('shine'), 1000);
+    });
+
+    // 🌙 Bulan (mode gelap romantis)
+    let isDarkRomantic = false;
+    moonIcon.addEventListener('click', function() {
+        isDarkRomantic = !isDarkRomantic;
+        if (isDarkRomantic) {
+            document.body.classList.add('dark-romantic');
+            responseEl.innerHTML = '🌙 Mode gelap romantis aktif...';
+            // Musik lebih pelan
+            audio.volume = 0.3;
+        } else {
+            document.body.classList.remove('dark-romantic');
+            responseEl.innerHTML = '☀️ Kembali ke mode normal.';
+            audio.volume = originalVolume;
+        }
+    });
 
 })();
 </script>
